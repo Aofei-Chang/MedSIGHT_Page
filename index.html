@@ -269,77 +269,210 @@
     </div>
   </section>
 
-  <!-- ========== RESULTS ========== -->
+  <!-- ========== MAIN EXPERIMENT RESULTS ========== -->
   <section class="section alt">
     <div class="container">
-      <h2 class="section-title">Results</h2>
+      <h2 class="section-title">Main Experiment Results</h2>
 
-      <h3 class="sub-title">Medical Visual Comprehension</h3>
+      <!-- ========== Result 1: Visual Comprehension (FULL) ========== -->
+      <h3 class="sub-title">Result 1: Medical Visual Comprehension (Recall / Accuracy)</h3>
       <p>
-        On standard VQA benchmarks (VQA-RAD, SLAKE, PathVQA, MMMU-Med, OmniMedVQA, and
-        DiagSeg-Diagnosis), <span class="brand-inline">MEDSIGHT</span> achieves an average
-        score of <strong>62.3</strong>, surpassing HuatuoGPT-Vision (58.3) despite using
-        only <strong>72K</strong> instruction-tuning samples — roughly
-        <strong>9&times; less</strong> than HuatuoGPT-Vision.
+        On six medical VQA benchmarks (VQA-RAD, SLAKE, PathVQA, MMMU-Med, OmniMedVQA, and
+        the diagnosis subset of DiagSeg), <span class="brand-inline">MEDSIGHT</span>
+        achieves an average score of <strong>62.3</strong>, outperforming the best
+        baseline HuatuoGPT-Vision (58.3) while being fine-tuned with only
+        <strong>72K</strong> instruction-tuning samples (roughly <strong>9&times; less</strong>
+        than HuatuoGPT-Vision). For each VQA dataset we report close-ended
+        (<em>c</em>) accuracy and overall (<em>a</em>) recall.
+        <span class="note-gray">Rows in gray denote models with partial overlap between
+        their training data and the evaluation sets.</span>
+        <strong>Bold</strong> marks the best result among unified models and overall.
       </p>
 
       <div class="table-wrapper">
-        <table class="results-table">
+        <table class="results-table compact">
           <thead>
             <tr>
-              <th>Model</th><th>#Params</th><th>#Data</th>
-              <th>VQA-RAD</th><th>SLAKE</th><th>PathVQA</th>
-              <th>MMMU-Med</th><th>OMVQA</th><th>DiagSeg</th><th>Avg.</th>
+              <th rowspan="2">Type</th>
+              <th rowspan="2">Model</th>
+              <th rowspan="2">#Params</th>
+              <th rowspan="2">#Data</th>
+              <th colspan="2">VQA-RAD&nbsp;&uarr;</th>
+              <th colspan="2">SLAKE&nbsp;&uarr;</th>
+              <th colspan="2">PathVQA&nbsp;&uarr;</th>
+              <th rowspan="2">MMMU-Med&nbsp;&uarr;</th>
+              <th rowspan="2">OMVQA&nbsp;&uarr;</th>
+              <th rowspan="2">DiagSeg-Diag&nbsp;&uarr;</th>
+              <th rowspan="2">Avg.&nbsp;&uarr;</th>
+            </tr>
+            <tr>
+              <th>close</th><th>all</th>
+              <th>close</th><th>all</th>
+              <th>close</th><th>all</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>LLaVA-Med</td><td>7B</td><td>60K</td><td>48.1</td><td>44.8</td><td>35.7</td><td>30.0</td><td>41.3</td><td>35.3</td><td>46.2</td></tr>
-            <tr><td>HuatuoGPT-Vision</td><td>7B</td><td>647K</td><td>60.0</td><td>60.1</td><td>41.3</td><td>43.3</td><td>66.4</td><td>51.1</td><td>58.3</td></tr>
-            <tr><td>OMG-LLaVA</td><td>7B</td><td>1.2M</td><td>37.6</td><td>39.9</td><td>36.2</td><td>32.7</td><td>18.3</td><td>28.0</td><td>41.0</td></tr>
-            <tr><td>MedPLIB</td><td>14B/7B</td><td>500K</td><td>34.8</td><td>37.4</td><td>18.2</td><td>28.7</td><td>61.9</td><td>13.1</td><td>37.3</td></tr>
+            <tr><td rowspan="14" class="rotate-cell">Comp.<br>only</td>
+                <td>BLIP-2</td><td>6.7B</td><td>&mdash;</td>
+                <td>43.4</td><td>36.8</td><td>41.6</td><td>35.3</td><td>48.5</td><td>28.8</td>
+                <td>27.3</td><td>26.9</td><td>22.3</td><td>34.5</td></tr>
+            <tr><td>LLaVA-v1.5</td><td>7B</td><td>158K</td>
+                <td>51.8</td><td>42.8</td><td>37.1</td><td>37.7</td><td>53.5</td><td>31.4</td>
+                <td>32.7</td><td>44.7</td><td>45.3</td><td>41.9</td></tr>
+            <tr><td>InstructBLIP</td><td>7B</td><td>364K</td>
+                <td>61.0</td><td>44.8</td><td>66.8</td><td>43.3</td><td>56.0</td><td>32.3</td>
+                <td>25.3</td><td>29.0</td><td>35.9</td><td>43.8</td></tr>
+            <tr><td>Yi-VL</td><td>6B</td><td>10K</td>
+                <td>52.6</td><td>42.1</td><td>52.4</td><td>38.4</td><td>54.9</td><td>30.9</td>
+                <td>38.0</td><td>50.2</td><td>33.0</td><td>43.6</td></tr>
+            <tr><td>InternVL2</td><td>8B</td><td>7.3M</td>
+                <td>64.9</td><td>49.0</td><td>66.6</td><td>50.1</td><td>60.0</td><td>31.9</td>
+                <td>43.3</td><td>54.5</td><td>42.3</td><td>51.4</td></tr>
+            <tr><td>Llama-3.2</td><td>11B</td><td>&mdash;</td>
+                <td>68.9</td><td>45.5</td><td>72.4</td><td>52.1</td><td>62.8</td><td>33.6</td>
+                <td>39.3</td><td>63.2</td><td>46.4</td><td>53.8</td></tr>
+            <tr><td>Med-Flamingo</td><td>8.3B</td><td>1.3M</td>
+                <td>58.6</td><td>43.0</td><td>47.0</td><td>25.5</td><td>61.9</td><td>31.3</td>
+                <td>28.7</td><td>34.9</td><td>34.6</td><td>40.6</td></tr>
+            <tr><td>LLaVA-Med</td><td>7B</td><td>60K</td>
+                <td>60.2</td><td>48.1</td><td>58.4</td><td>44.8</td><td>62.3</td><td>35.7</td>
+                <td>30.0</td><td>41.3</td><td>35.3</td><td>46.2</td></tr>
+            <tr><td>HuatuoGPT-Vision</td><td>7B</td><td>647K</td>
+                <td>69.7</td><td>60.0</td><td>69.0</td><td>60.1</td><td>63.6</td><td>41.3</td>
+                <td>43.3</td><td>66.4</td><td>51.1</td><td>58.3</td></tr>
+            <tr class="overlap"><td>Qwen3-VL</td><td>8B</td><td>&mdash;</td>
+                <td>72.8</td><td>53.4</td><td>76.9</td><td>66.1</td><td>66.9</td><td>36.9</td>
+                <td>46.7</td><td>75.3</td><td>44.5</td><td>59.9</td></tr>
+            <tr class="overlap"><td>InternVL3.5</td><td>8B</td><td>16.3M</td>
+                <td>67.7</td><td>48.9</td><td>82.1</td><td>72.2</td><td>67.0</td><td>38.6</td>
+                <td>46.0</td><td>84.5</td><td>44.6</td><td>61.3</td></tr>
+            <tr class="overlap"><td>HealthGPT-M3</td><td>3.8B</td><td>1.5M</td>
+                <td>73.7</td><td>55.9</td><td>74.6</td><td>56.4</td><td>78.7</td><td>39.7</td>
+                <td>43.3</td><td>68.5</td><td>44.1</td><td>59.4</td></tr>
+            <tr class="overlap"><td>HealthGPT-L14</td><td>14B</td><td>1.5M</td>
+                <td>77.7</td><td>58.3</td><td>76.4</td><td>64.5</td><td>85.9</td><td>44.4</td>
+                <td>49.2</td><td>74.4</td><td>51.2</td><td>64.7</td></tr>
+            <tr class="overlap"><td>Lingshu-7B</td><td>7B</td><td>7.1M</td>
+                <td>78.3</td><td>64.5</td><td>77.2</td><td>70.8</td><td>85.0</td><td>55.5</td>
+                <td>60.7</td><td>78.4</td><td>55.4</td><td>69.5</td></tr>
+
+            <tr class="divider"><td colspan="14"></td></tr>
+
+            <tr><td rowspan="4" class="rotate-cell">Unified</td>
+                <td>OMG-LLaVA</td><td>7B</td><td>1.2M</td>
+                <td>56.3</td><td>37.6</td><td>54.6</td><td>39.9</td><td>65.2</td><td>36.2</td>
+                <td>32.7</td><td>18.3</td><td>28.0</td><td>41.0</td></tr>
+            <tr><td>MIMO*</td><td>7B</td><td>&mdash;</td>
+                <td>58.8</td><td>&mdash;</td><td>57.0</td><td>&mdash;</td><td>52.4</td><td>&mdash;</td>
+                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+            <tr><td>MedPLIB</td><td>14B/7B</td><td>500K</td>
+                <td>58.3</td><td>34.8</td><td>48.4</td><td>37.4</td><td>35.2</td><td>18.2</td>
+                <td>28.7</td><td>61.9</td><td>13.1</td><td>37.3</td></tr>
             <tr class="ours">
               <td><span class="brand-inline">MEDSIGHT</span> (Ours)</td>
               <td>8B</td><td>72K</td>
-              <td><strong>61.4</strong></td><td><strong>60.2</strong></td><td><strong>42.6</strong></td>
-              <td><strong>51.3</strong></td><td><strong>68.9</strong></td><td><strong>58.9</strong></td>
-              <td><strong>62.3</strong></td>
+              <td><strong>79.9</strong></td><td><strong>61.4</strong></td>
+              <td><strong>70.9</strong></td><td><strong>60.2</strong></td>
+              <td><strong>66.3</strong></td><td><strong>42.6</strong></td>
+              <td><strong>51.3</strong></td><td><strong>68.9</strong></td>
+              <td><strong>58.9</strong></td><td><strong>62.3</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p class="caption-note">
+        <strong>Table 1.</strong> Comparison of <span class="brand-inline">MEDSIGHT</span>
+        with general/medical LVLMs and unified LVLMs on medical visual comprehension.
+        <em>Comp.-Only</em> denotes models trained solely for visual comprehension;
+        <em>Unified</em> models are trained on both comprehension and segmentation.
+        <span class="note-gray">Gray rows</span> indicate partial overlap between training
+        and evaluation data. *MIMO is evaluated only on the three public VQA splits in
+        the original paper.
+      </p>
 
-      <h3 class="sub-title">Grounded Diagnostic Segmentation (DiagSeg)</h3>
+      <!-- ========== Result 2: DiagSeg (FULL) ========== -->
+      <h3 class="sub-title">Result 2: DiagSeg &mdash; Grounded Diagnostic Segmentation (8 modalities)</h3>
       <p>
-        On the proposed <strong>DiagSeg</strong> benchmark covering 8 medical imaging
-        modalities, <span class="brand-inline">MEDSIGHT</span> achieves a mean Dice of
-        <strong>69.9</strong> for segmentation and <strong>58.9</strong> recall for
-        diagnosis — substantially ahead of the next best model on both axes.
+        On the proposed <strong>DiagSeg</strong> benchmark covering eight medical imaging
+        modalities, <span class="brand-inline">MEDSIGHT</span> attains a mean diagnosis
+        recall of <strong>58.9</strong> and a mean segmentation Dice of
+        <strong>69.9</strong> &mdash; substantially ahead of every baseline on both axes.
       </p>
 
       <div class="table-wrapper">
-        <table class="results-table">
+        <table class="results-table compact">
           <thead>
             <tr>
-              <th>Model</th>
+              <th rowspan="2">Model</th>
+              <th rowspan="2">#Params</th>
+              <th colspan="9" class="group-head">DiagSeg-Diagnosis (Recall) &uarr;</th>
+              <th colspan="9" class="group-head alt-group">DiagSeg-Segmentation (Dice) &uarr;</th>
+            </tr>
+            <tr>
               <th>CT</th><th>MRI</th><th>X-ray</th><th>Path</th>
-              <th>US</th><th>End</th><th>Der</th><th>OCT</th>
-              <th>Avg.</th>
+              <th>US</th><th>End</th><th>Der</th><th>OCT</th><th>Avg.</th>
+              <th>CT</th><th>MRI</th><th>X-ray</th><th>Path</th>
+              <th>US</th><th>End</th><th>Der</th><th>OCT</th><th>Avg.</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>LISA</td><td>14.1</td><td>15.7</td><td>9.8</td><td>34.0</td><td>45.2</td><td>39.3</td><td>28.9</td><td>62.6</td><td>31.8</td></tr>
-            <tr><td>GLaMM</td><td>1.6</td><td>4.5</td><td>16.6</td><td>22.8</td><td>9.9</td><td>5.6</td><td>26.3</td><td>0.8</td><td>11.0</td></tr>
-            <tr><td>OMG-LLaVA</td><td>0.9</td><td>5.1</td><td>15.5</td><td>20.7</td><td>11.7</td><td>7.7</td><td>25.9</td><td>1.0</td><td>11.1</td></tr>
-            <tr><td>MedPLIB</td><td>3.8</td><td>47.1</td><td>29.8</td><td>19.3</td><td>49.9</td><td>16.6</td><td>80.4</td><td>7.2</td><td>31.8</td></tr>
+            <tr><td>LISA</td><td>7B</td>
+              <td>11.8</td><td>7.9</td><td>3.8</td><td>21.6</td><td>5.9</td><td>2.9</td><td>33.4</td><td>27.8</td><td>14.1</td>
+              <td>15.7</td><td>9.8</td><td>34.0</td><td>45.2</td><td>39.3</td><td>28.9</td><td>62.6</td><td>19.1</td><td>31.8</td>
+            </tr>
+            <tr><td>LISA++</td><td>7B</td>
+              <td>9.3</td><td>19.6</td><td>5.1</td><td>16.7</td><td>6.2</td><td>19.4</td><td>35.7</td><td>16.7</td><td>15.1</td>
+              <td>1.9</td><td>12.5</td><td>21.6</td><td>26.9</td><td>8.9</td><td>6.8</td><td>31.2</td><td>0.7</td><td>13.8</td>
+            </tr>
+            <tr><td>LaSagnA</td><td>7B</td>
+              <td>3.6</td><td>4.1</td><td>1.0</td><td>8.2</td><td>5.1</td><td>0.0</td><td>14.8</td><td>2.8</td><td>4.4</td>
+              <td>9.3</td><td>8.7</td><td>18.2</td><td>30.0</td><td>14.1</td><td>18.0</td><td>34.9</td><td>12.6</td><td>18.2</td>
+            </tr>
+            <tr><td>GLaMM</td><td>7B</td>
+              <td>11.4</td><td>20.6</td><td>6.9</td><td>16.6</td><td>38.9</td><td>10.6</td><td>22.3</td><td>3.1</td><td>16.9</td>
+              <td>1.6</td><td>4.5</td><td>16.6</td><td>22.8</td><td>9.9</td><td>5.6</td><td>26.3</td><td>0.8</td><td>11.0</td>
+            </tr>
+            <tr><td>OMG-LLaVA</td><td>7B</td>
+              <td>12.7</td><td>23.0</td><td>10.7</td><td>17.0</td><td>34.6</td><td>5.5</td><td>26.9</td><td>15.7</td><td>18.3</td>
+              <td>0.9</td><td>5.1</td><td>15.5</td><td>20.7</td><td>11.7</td><td>7.7</td><td>25.9</td><td>1.0</td><td>11.1</td>
+            </tr>
+            <tr><td>MedPLIB</td><td>14B/7B</td>
+              <td>4.5</td><td>18.5</td><td>15.3</td><td>5.3</td><td>71.9</td><td>22.4</td><td>29.0</td><td>0.4</td><td>13.1</td>
+              <td>3.8</td><td>47.1</td><td>29.8</td><td>19.3</td><td>49.9</td><td>16.6</td><td>80.4</td><td>7.2</td><td>31.8</td>
+            </tr>
             <tr class="ours">
-              <td><span class="brand-inline">MEDSIGHT</span> (Ours)</td>
+              <td><span class="brand-inline">MEDSIGHT</span> (Ours)</td><td>8B</td>
+              <td><strong>54.6</strong></td><td><strong>54.4</strong></td><td><strong>59.1</strong></td>
+              <td><strong>80.1</strong></td><td>51.7</td><td><strong>62.4</strong></td>
+              <td><strong>40.2</strong></td><td><strong>69.3</strong></td><td><strong>58.9</strong></td>
               <td><strong>65.8</strong></td><td><strong>82.3</strong></td><td><strong>57.7</strong></td>
               <td><strong>52.9</strong></td><td><strong>65.8</strong></td><td><strong>70.0</strong></td>
-              <td><strong>87.7</strong></td><td><strong>55.6</strong></td>
-              <td><strong>69.9</strong></td>
+              <td><strong>87.7</strong></td><td><strong>55.6</strong></td><td><strong>69.9</strong></td>
             </tr>
           </tbody>
         </table>
+      </div>
+      <p class="caption-note">
+        <strong>Table 2.</strong> Mean Recall and mean Dice on DiagSeg.
+        <span class="brand-inline">MEDSIGHT</span> leads on both diagnosis and
+        segmentation across all eight modalities, exceeding the best baselines by
+        <strong>+40.6 (Recall)</strong> and <strong>+38.1 (Dice)</strong> on average.
+        Modality abbreviations: CT, MRI, X-ray, Path (pathology), US (ultrasound),
+        End (endoscopy), Der (dermoscopy), OCT.
+      </p>
+
+      <!-- Pointer to paper for remaining experiments -->
+      <div class="callout">
+        <div class="callout-icon"><i class="fas fa-book-open"></i></div>
+        <div>
+          <strong>More experiments in the paper.</strong>
+          We additionally report <em>Text-Prompted Medical Image Segmentation</em>
+          (MeCoVQA-G across 8 modalities, including OOD cases), a full
+          <em>Ablation Study</em> over each component and training stage, and
+          analyses of the learned codebook and backbone variants.
+          Please refer to the <a href="static/pdfs/medsight.pdf">paper</a>
+          for the full results, additional baselines, and qualitative comparisons.
+        </div>
       </div>
     </div>
   </section>

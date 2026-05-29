@@ -382,6 +382,88 @@ figcaption {
   background: #fafbfd;
 }
 
+/* Compact dense table (used for main experiment tables) */
+.results-table.compact { min-width: 980px; font-size: 13.5px; }
+.results-table.compact th,
+.results-table.compact td { padding: 6px 8px; }
+.results-table.compact thead th {
+  font-size: 13px;
+}
+
+/* Cell that visually groups multiple rows on the left */
+.results-table .rotate-cell {
+  background: #f3f5f9;
+  font-weight: 600;
+  color: var(--brand-dark);
+  text-align: center;
+  font-size: 13px;
+  border-right: 1px solid var(--border);
+}
+
+/* Sub-group header above the column blocks */
+.results-table .group-head {
+  background: #d8e6f7;
+  color: var(--brand-dark);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--border);
+}
+.results-table .group-head.alt-group { background: #e9defc; }
+
+/* Rows whose training data overlaps eval sets (rendered subtly) */
+.results-table tr.overlap td {
+  background: #f5f5f5;
+  color: #6a6a6a;
+  font-style: italic;
+}
+.results-table tr.overlap td:first-child { font-style: italic; }
+
+/* Thin divider row between groups */
+.results-table tr.divider td {
+  padding: 0;
+  height: 4px;
+  background: var(--bg-alt);
+  border-bottom: 2px solid var(--border);
+}
+
+/* Italic gray inline note (used in body text + captions) */
+.note-gray {
+  color: #6a6a6a;
+  font-style: italic;
+}
+
+/* Captions below tables */
+.caption-note {
+  font-size: 14.5px;
+  color: var(--text-soft);
+  line-height: 1.55;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Callout box pointing readers to the paper */
+.callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--brand-light);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 28px 0 0 0;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.callout-icon {
+  flex: 0 0 auto;
+  color: var(--brand);
+  font-size: 22px;
+  padding-top: 2px;
+}
+.callout strong { color: var(--brand-dark); }
+.callout em { font-style: italic; }
+
 /* ===================== BIBTEX ===================== */
 .bibtex {
   background: #1f2937;
