@@ -215,42 +215,32 @@ code {
 }
 
 /* ===================== FIGURES ===================== */
+/* The actual figure width is set per-element by the JS auto-fitter (see
+   static/js/index.js) using the image's natural pixel size. This keeps
+   figures from being stretched and removes "floating" small images.       */
 figure {
-  margin: 28px 0 12px 0;
+  margin: 18px auto 8px auto;
   text-align: center;
+  /* JS will set max-width per figure; this is the fallback cap. */
+  max-width: 100%;
 }
 figure img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
   height: auto;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   background: #fff;
+  margin: 0;
 }
 figcaption {
-  margin-top: 12px;
-  font-size: 15px;
+  margin: 10px auto 0 auto;
+  font-size: 14.5px;
   color: var(--text-soft);
-  line-height: 1.55;
-  text-align: left;
-}
-.medium-figure img { max-width: 720px; }
-
-/* Figure sized to its natural content — centered, smaller than full column */
-.compact-figure {
+  line-height: 1.5;
   text-align: center;
-}
-.compact-figure img {
-  max-width: 580px;   /* matches the natural scale of the codebook strip */
-  width: 100%;
-  margin: 0 auto;
-  display: block;
-}
-.compact-figure figcaption {
-  max-width: 580px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  max-width: 100%;
 }
 
 /* ===================== VIDEO ===================== */
