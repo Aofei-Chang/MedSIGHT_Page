@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEDSIGHT: Towards Grounded Visual Comprehension in Medical Large Vision-Language Models</title>
+  <meta name="description" content="MEDSIGHT is a unified medical large vision-language model that supports fine-grained perception, region-level expression, and pixel-level grounding within a single generative framework." />
+  <meta name="keywords" content="MEDSIGHT, Medical Vision-Language Model, Med-LVLM, Grounded Segmentation, ICML 2026" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MEDSIGHT: Towards Grounded Visual Comprehension in Medical Large Vision-Language Models" />
+  <meta property="og:description" content="A unified Med-LVLM with Region Perceiver and Modality-aware Region Codebook for end-to-end grounded medical reasoning." />
+  <meta property="og:image" content="static/images/architecture.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="static/css/index.css" />
+</head>
+
+<body>
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <div class="venue-tag">ICML 2026</div>
+
+      <h1 class="paper-title">
+        <span class="brand-large">M</span><span class="brand-small">ED</span><span class="brand-large">SIGHT</span>:
+        Towards Grounded Visual Comprehension in<br />
+        Medical Large Vision-Language Models
+      </h1>
+
+      <div class="authors">
+        <span class="author"><a href="#">Aofei Chang</a><sup>1*</sup></span>
+        <span class="author"><a href="#">Le Huang</a><sup>2</sup></span>
+        <span class="author"><a href="#">Alex James Boyd</a><sup>2</sup></span>
+        <span class="author"><a href="#">Parminder Bhatia</a><sup>2</sup></span>
+        <span class="author"><a href="#">Taha Kass-Hout</a><sup>2</sup></span>
+        <span class="author"><a href="#">Fenglong Ma</a><sup>1</sup></span>
+        <span class="author"><a href="#">Cao Xiao</a><sup>2</sup></span>
+      </div>
+
+      <div class="affiliations">
+        <span><sup>1</sup>The Pennsylvania State University</span>
+        <span class="dot">&middot;</span>
+        <span><sup>2</sup>GE HealthCare</span>
+      </div>
+      <div class="footnote">
+        <sup>*</sup>Work done during an internship at GE HealthCare.
+      </div>
+
+      <!-- Resource buttons -->
+      <div class="button-row">
+        <a class="btn" href="static/pdfs/medsight.pdf">
+          <span class="icon"><i class="fas fa-file-pdf"></i></span>
+          <span>Paper</span>
+        </a>
+        <a class="btn" href="https://arxiv.org/abs/0000.00000">
+          <span class="icon"><i class="ai ai-arxiv"></i></span>
+          <span>arXiv</span>
+        </a>
+        <a class="btn" href="https://github.com/Aofei-Chang/MedSIGHT">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>Code</span>
+        </a>
+        <a class="btn" href="#video">
+          <span class="icon"><i class="fas fa-video"></i></span>
+          <span>Video</span>
+        </a>
+        <a class="btn" href="https://huggingface.co/">
+          <span class="icon"><i class="fas fa-cube"></i></span>
+          <span>Model</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEASER ========== -->
+  <section class="section teaser">
+    <div class="container narrow">
+      <figure>
+        <img src="static/images/architecture.png" alt="MEDSIGHT architecture overview" />
+        <figcaption>
+          <strong>Figure 1.</strong> Overview of <span class="brand-inline">MEDSIGHT</span>.
+          (a) The end-to-end framework supports both fine-grained visual perception and
+          pixel-level grounding within a single generative LLM.
+          (b) The Region Perceiver uses dual cross-attention between region queries and
+          upsampled image features. (c) The modality-aware region codebook discretizes
+          region embeddings into interpretable codes that are added to the LLM vocabulary.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== ABSTRACT ========== -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="section-title">Abstract</h2>
+      <p class="abstract">
+        Medical large vision–language models (Med-LVLMs) have recently achieved remarkable
+        progress in vision–language comprehension and medical image segmentation. However,
+        existing models still struggle to unify these two capabilities, which is essential
+        for clinically meaningful reasoning that connects visual findings with semantic
+        interpretation. We present
+        <strong><span class="brand-inline">MEDSIGHT</span>, a unified framework that
+        equips Med-LVLMs with structured, pixel-level understanding for grounded visual
+        comprehension</strong>. <span class="brand-inline">MEDSIGHT</span> introduces a
+        novel <em>Region Perceiver</em> module that produces region-centric tokens,
+        encoding spatial information directly into the representation space of the language
+        model. We further propose a medical region codebook in the LLM vocabulary,
+        allowing the model to generate discrete region codes as symbolic representations
+        of anatomical and pathological regions. These codes are decoded through the
+        Region Perceiver to reconstruct segmentation masks, achieving end-to-end spatial
+        grounding. A progressive training strategy stably aligns these modules.
+        Trained on only 72K multimodal instruction pairs,
+        <span class="brand-inline">MEDSIGHT</span> achieves state-of-the-art performance
+        across diverse imaging modalities on both medical comprehension and segmentation
+        tasks.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== VIDEO SLOT (user inserts mp4) ========== -->
+  <section class="section video-section" id="video">
+    <div class="container narrow">
+      <h2 class="section-title">Video Tutorial</h2>
+      <p class="section-subtitle">
+        Walk-through of how to use <span class="brand-inline">MEDSIGHT</span> for grounded
+        medical reasoning and segmentation.
+      </p>
+
+      <!--
+        ============================================================
+        VIDEO SLOT — INSERT YOUR MP4 HERE
+        ------------------------------------------------------------
+        1. Place your tutorial file at: static/videos/tutorial.mp4
+        2. (Optional) Place a poster image at: static/videos/poster.jpg
+        3. The <video> tag below will pick it up automatically.
+        ============================================================
+      -->
+      <div class="video-wrapper">
+        <video controls preload="metadata"
+               poster="static/videos/poster.jpg">
+          <source src="static/videos/tutorial.mp4" type="video/mp4" />
+          Your browser does not support the video tag. Please download the
+          <a href="static/videos/tutorial.mp4">tutorial video</a> directly.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MOTIVATION ========== -->
+  <section class="section alt">
+    <div class="container narrow">
+      <h2 class="section-title">Motivation</h2>
+      <p>
+        Recent Med-LVLMs have demonstrated impressive multimodal understanding of medical
+        data, but most remain limited to high-level visual comprehension and
+        <strong>lack pixel-level grounding</strong> that aligns reasoning with verifiable
+        visual evidence. Two key limitations of prior unified Med-LVLMs:
+      </p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-badge">①</div>
+          <h3>Patch-only inputs</h3>
+          <p>
+            CLIP patch tokens encode coarse semantic context and discard crucial spatial
+            details — lesion boundaries, organ contours, tissue textures — that medical
+            reasoning depends on.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-badge">②</div>
+          <h3>Single <code>[SEG]</code> token outputs</h3>
+          <p>
+            Representing every segmentation region with one token prevents the model from
+            distinguishing diverse anatomical structures and producing region-specific
+            outputs needed for accurate grounding.
+          </p>
+        </div>
+      </div>
+
+      <figure class="medium-figure">
+        <img src="static/images/figure1.png" alt="Performance on grounded diagnostic segmentation" />
+        <figcaption>
+          <strong>Figure 2.</strong> Performance of Med-LVLMs on Grounded Diagnostic
+          Segmentation. Existing models cannot jointly diagnose and ground.
+          <span class="brand-inline">MEDSIGHT</span> dominates the upper-right region.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== METHOD ========== -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="section-title">Method</h2>
+      <p>
+        <span class="brand-inline">MEDSIGHT</span> augments a frozen CLIP image encoder and
+        LLM with two complementary modules — a <strong>Region Perceiver</strong> that
+        produces pixel-aware region tokens, and a
+        <strong>Modality-aware Region Codebook</strong> that is embedded into the LLM
+        vocabulary. A progressive training pipeline aligns these components end-to-end.
+      </p>
+
+      <h3 class="sub-title">
+        <span class="badge">①</span> Region Perceiver &mdash; Fine-grained Perception
+      </h3>
+      <p>
+        <em>L</em> learnable region queries <strong>Q</strong> interact with upsampled
+        CLIP features through <strong>dual cross-attention</strong> — region&hairsp;↔&hairsp;image
+        — producing region embeddings <strong>Q<sub>r</sub></strong> that encode both
+        semantic context and pixel-level spatial detail. The Region Perceiver is
+        pre-trained on BiomedParse data with
+        <code>L<sub>R</sub> = L<sub>BCE</sub> + L<sub>Dice</sub> + L<sub>CE</sub></code>
+        using Hungarian matching, following DETR-style segmentation supervision.
+      </p>
+
+      <h3 class="sub-title">
+        <span class="badge">②</span> Modality-aware Region Codebook
+      </h3>
+      <p>
+        Region embeddings <strong>Q<sub>r</sub></strong> are discretized into
+        <em>K&hairsp;&times;&hairsp;M</em> codes — one bank per imaging modality. Each
+        region picks its nearest code, which is mapped back into the visual feature space
+        via <strong>W<sub>m</sub></strong>. Codes are appended to the LLM vocabulary,
+        letting the LLM <strong>generate region tokens (e.g.,
+        <code>[C2_16]</code>)</strong> that the text&rarr;vision projector decodes into
+        segmentation masks.
+      </p>
+
+      <h3 class="sub-title">
+        <span class="badge">③</span> Progressive Training Pipeline
+      </h3>
+      <div class="pipeline">
+        <div class="stage">
+          <div class="stage-title">Stage 1</div>
+          <p>
+            Pre-train the Region Perceiver on segmentation data. Align visual features
+            with the language space via <code>P<sub>v&rarr;t</sub></code>.
+          </p>
+        </div>
+        <div class="arrow">&#10142;</div>
+        <div class="stage">
+          <div class="stage-title">Stage 2</div>
+          <p>
+            Learn the modality-aware codebook and integrate it into the LLM vocabulary.
+            Align text&rarr;vision grounding via <code>P<sub>t&rarr;v</sub></code>.
+          </p>
+        </div>
+        <div class="arrow">&#10142;</div>
+        <div class="stage">
+          <div class="stage-title">Stage 3</div>
+          <p>
+            Unified grounded instruction tuning: jointly fine-tune LLM, projectors and
+            codebook with both reasoning and grounding data.
+          </p>
+        </div>
+      </div>
+
+      <div class="equation-box">
+        Final objective: &nbsp;
+        <em>L</em><sub>final</sub> = <em>L</em><sub>LLM</sub> + <em>L</em><sub>seg</sub>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESULTS ========== -->
+  <section class="section alt">
+    <div class="container">
+      <h2 class="section-title">Results</h2>
+
+      <h3 class="sub-title">Medical Visual Comprehension</h3>
+      <p>
+        On standard VQA benchmarks (VQA-RAD, SLAKE, PathVQA, MMMU-Med, OmniMedVQA, and
+        DiagSeg-Diagnosis), <span class="brand-inline">MEDSIGHT</span> achieves an average
+        score of <strong>62.3</strong>, surpassing HuatuoGPT-Vision (58.3) despite using
+        only <strong>72K</strong> instruction-tuning samples — roughly
+        <strong>9&times; less</strong> than HuatuoGPT-Vision.
+      </p>
+
+      <div class="table-wrapper">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Model</th><th>#Params</th><th>#Data</th>
+              <th>VQA-RAD</th><th>SLAKE</th><th>PathVQA</th>
+              <th>MMMU-Med</th><th>OMVQA</th><th>DiagSeg</th><th>Avg.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>LLaVA-Med</td><td>7B</td><td>60K</td><td>48.1</td><td>44.8</td><td>35.7</td><td>30.0</td><td>41.3</td><td>35.3</td><td>46.2</td></tr>
+            <tr><td>HuatuoGPT-Vision</td><td>7B</td><td>647K</td><td>60.0</td><td>60.1</td><td>41.3</td><td>43.3</td><td>66.4</td><td>51.1</td><td>58.3</td></tr>
+            <tr><td>OMG-LLaVA</td><td>7B</td><td>1.2M</td><td>37.6</td><td>39.9</td><td>36.2</td><td>32.7</td><td>18.3</td><td>28.0</td><td>41.0</td></tr>
+            <tr><td>MedPLIB</td><td>14B/7B</td><td>500K</td><td>34.8</td><td>37.4</td><td>18.2</td><td>28.7</td><td>61.9</td><td>13.1</td><td>37.3</td></tr>
+            <tr class="ours">
+              <td><span class="brand-inline">MEDSIGHT</span> (Ours)</td>
+              <td>8B</td><td>72K</td>
+              <td><strong>61.4</strong></td><td><strong>60.2</strong></td><td><strong>42.6</strong></td>
+              <td><strong>51.3</strong></td><td><strong>68.9</strong></td><td><strong>58.9</strong></td>
+              <td><strong>62.3</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-title">Grounded Diagnostic Segmentation (DiagSeg)</h3>
+      <p>
+        On the proposed <strong>DiagSeg</strong> benchmark covering 8 medical imaging
+        modalities, <span class="brand-inline">MEDSIGHT</span> achieves a mean Dice of
+        <strong>69.9</strong> for segmentation and <strong>58.9</strong> recall for
+        diagnosis — substantially ahead of the next best model on both axes.
+      </p>
+
+      <div class="table-wrapper">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>CT</th><th>MRI</th><th>X-ray</th><th>Path</th>
+              <th>US</th><th>End</th><th>Der</th><th>OCT</th>
+              <th>Avg.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>LISA</td><td>14.1</td><td>15.7</td><td>9.8</td><td>34.0</td><td>45.2</td><td>39.3</td><td>28.9</td><td>62.6</td><td>31.8</td></tr>
+            <tr><td>GLaMM</td><td>1.6</td><td>4.5</td><td>16.6</td><td>22.8</td><td>9.9</td><td>5.6</td><td>26.3</td><td>0.8</td><td>11.0</td></tr>
+            <tr><td>OMG-LLaVA</td><td>0.9</td><td>5.1</td><td>15.5</td><td>20.7</td><td>11.7</td><td>7.7</td><td>25.9</td><td>1.0</td><td>11.1</td></tr>
+            <tr><td>MedPLIB</td><td>3.8</td><td>47.1</td><td>29.8</td><td>19.3</td><td>49.9</td><td>16.6</td><td>80.4</td><td>7.2</td><td>31.8</td></tr>
+            <tr class="ours">
+              <td><span class="brand-inline">MEDSIGHT</span> (Ours)</td>
+              <td><strong>65.8</strong></td><td><strong>82.3</strong></td><td><strong>57.7</strong></td>
+              <td><strong>52.9</strong></td><td><strong>65.8</strong></td><td><strong>70.0</strong></td>
+              <td><strong>87.7</strong></td><td><strong>55.6</strong></td>
+              <td><strong>69.9</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CASE STUDY ========== -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="section-title">Qualitative Examples</h2>
+      <p>
+        <span class="brand-inline">MEDSIGHT</span> correctly identifies the abnormality,
+        emits the matching region code (e.g., <code>[C3_11]</code>,
+        <code>[C10_3]</code>, <code>[C1_16]</code>), and the text&rarr;vision projector
+        decodes it into an accurate mask. Multi-region segmentation (e.g., liver and
+        spleen) is captured by separate, semantically distinct codes.
+      </p>
+      <figure>
+        <img src="static/images/case_study.png" alt="Grounded diagnostic segmentation case study" />
+        <figcaption>
+          <strong>Figure 3.</strong> Grounded diagnostic segmentation across modalities
+          (ultrasound, MRI, CT) — input image, prompt &amp; ground truth, ground-truth
+          mask, model answer, and decoded mask logits.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="static/images/codebook_cases.png" alt="Region codebook visualization" />
+        <figcaption>
+          <strong>Figure 4.</strong> Each region code learns a coherent anatomical pattern.
+          For example, <code>[C1_16]</code> attends to the liver in abdominal CT.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== BIBTEX ========== -->
+  <section class="section alt">
+    <div class="container narrow">
+      <h2 class="section-title">BibTeX</h2>
+      <pre class="bibtex"><code>@inproceedings{chang2026medsight,
+  title     = {MEDSIGHT: Towards Grounded Visual Comprehension in
+               Medical Large Vision-Language Models},
+  author    = {Chang, Aofei and Huang, Le and Boyd, Alex James and
+               Bhatia, Parminder and Kass-Hout, Taha and
+               Ma, Fenglong and Xiao, Cao},
+  booktitle = {Proceedings of the 43rd International Conference on
+               Machine Learning (ICML)},
+  year      = {2026}
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ========== ACKNOWLEDGMENTS ========== -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="section-title">Acknowledgments</h2>
+      <p>
+        We thank the anonymous reviewers for their insightful comments. We also thank
+        Dr.&nbsp;Anjali Rajeev from GE HealthCare as one of the experts for participating
+        in the human validation experiments and Dr.&nbsp;Haidong Yi from St.&nbsp;Jude
+        Children's Research Hospital for valuable suggestions on the manuscript. This work
+        was partially supported by the National Science Foundation under Grant No.&nbsp;223827
+        (F.&nbsp;Ma).
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container narrow">
+      <p>
+        &copy; 2026 The <span class="brand-inline">MEDSIGHT</span> authors.
+        Page source available on
+        <a href="https://github.com/Aofei-Chang/MedSIGHT">GitHub</a>.
+      </p>
+      <p class="small">
+        This website is for academic, non-commercial use. Please contact the authors for
+        permission to reuse content beyond fair use.
+      </p>
+    </div>
+  </footer>
+
+  <script src="static/js/index.js"></script>
+</body>
+</html>
