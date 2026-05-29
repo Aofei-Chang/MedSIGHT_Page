@@ -236,6 +236,23 @@ figcaption {
 }
 .medium-figure img { max-width: 720px; }
 
+/* Figure sized to its natural content — centered, smaller than full column */
+.compact-figure {
+  text-align: center;
+}
+.compact-figure img {
+  max-width: 580px;   /* matches the natural scale of the codebook strip */
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+.compact-figure figcaption {
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 /* ===================== VIDEO ===================== */
 .video-wrapper {
   position: relative;
